@@ -21,9 +21,7 @@ public class WebSecurity {
                 // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
                 .csrf(AbstractHttpConfigurer::disable)
                 // 요청 권한 경로 설정하기
-                .authorizeHttpRequests(a -> {
-                    a.requestMatchers("/users/**").permitAll();
-                })
+                .authorizeHttpRequests(a -> a.requestMatchers("/users/**").permitAll())
                 // 프레임 옵션 보안 헤더가 비활성화, 웹 페이지를 렌더링 해야하는 경우 필요하다!
                 .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 

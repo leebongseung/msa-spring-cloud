@@ -1,4 +1,6 @@
 rootProject.name = 'msa-spring-cloud'
+include 'catalog-service'
 include 'eureka-server'
 include 'gateway-service'
 include 'users-service'
+include 'order-service'

@@ -8,10 +8,22 @@ repositories {
 	mavenCentral()
 }
 
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+bootJar.enabled = false
+
 subprojects{
 	group = 'com.example'
 	version = '0.0.1-SNAPSHOT'
 	sourceCompatibility = '17'
+
+	repositories {
+		mavenCentral()
+	}
 
 	java {
 		toolchain {
@@ -19,6 +31,9 @@ subprojects{
 		}
 	}
 
+	test {
+		useJUnitPlatform()
+	}
 }
 
 project(':eureka-server'){
@@ -29,9 +44,23 @@ project(':eureka-server'){
 
 project(':gateway-service'){
 	dependencies {
+	}
+}
+
+project(':users-service'){
+	dependencies {
 
 	}
 }
 
+project(':catalog-service'){
+	dependencies {
 
+	}
+}
 
+project(':order-service'){
+	dependencies {
+
+	}
+}

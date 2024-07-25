@@ -3,35 +3,27 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      # 모든 라우터에 적용되는 기본 필터 설정하기.
       default-filters:
         - name: GlobalFilter
           args:
             baseMessage: Spring Cloud Gateway GlobalFilter
             preLogger: true
             postLogger: true
+      # 게이트 웨이 라우터 정의하기
       routes:
-        - id: first-service
-          uri: lb://MY-FIRST-SERVICE
+        - id: user-service # 식별 id
+          uri: lb://USERS-SERVICE # 연결되는 대상 서비스의 주소를 사용한다는 의미
           predicates:
-            - Path=/first-service/**
-          filters:
-            - name: CustomFilter
-            - name: LoggingFilter
-              args:
-                baseMessage: Hi, there
-                preLogger: true
-                postLogger: true
-        - id: second-service
-          uri: lb://MY-SECOND-SERVICE
+            - Path=/users-service/** # 라우트 매칭 조건을 정의한다.
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
           predicates:
-            - Path=/second-service/**
-          filters:
-            - name: CustomFilter
-            - name: LoggingFilter
-              args:
-                baseMessage: Hi, there
-                preLogger: true
-                postLogger: true
+            - Path=/catalog-service/**
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
 server:
   port: 8000
 
